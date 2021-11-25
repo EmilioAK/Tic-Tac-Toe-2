@@ -6,10 +6,8 @@ const ticTacToe = (function() {
     
   const reset = () => {
     board = Array.from(Array(9), x => null);
-    metadata = {
-      whosTurn: 0,
-      winner: null
-    };
+    metadata.whosTurn = 0;
+    metadata.winner = null;
   }
 
   reset();
