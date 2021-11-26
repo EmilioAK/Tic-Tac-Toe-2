@@ -45,46 +45,12 @@ const ticTacToe = (function() {
     }
   };
   const place = (index) => {
-    console.log(`place: ${index}`)
     board[index] = metadata.whosTurn;
     gameOver();
   }
 
   return { place, reset, getBoard, getMetadata };
 })();
-
-
-// ticTacToe.place(0)
-// ticTacToe.place(8)
-// ticTacToe.place(3)
-// ticTacToe.place(2)
-// ticTacToe.place(7)
-// ticTacToe.place(5)
-// ticTacToe.place(4)
-// ticTacToe.place(6)
-// ticTacToe.place(1)
-// console.log(ticTacToe.getBoard())
-// console.log(ticTacToe.getMetadata().winner)
-
-// Game loop idea:
-// Event listner on every cell
-// Run place() on cell
-// check winner every time
-// problem: Decouples board from DOM
-
-// Second idea:
-// Event listner on every cell
-// run place() on cell
-// check winner
-// Redraw dom to reflect board
-// problem: still feels janky...
-
-// Third idea
-// Okay so we have an API above, and the below code here should send requests to it, and then draw the board after each request. Decoupled
-// So clicking a cell should send a click request (place())
-// After a place is run, the board should be drawn (below loop kind of works)
-// The API tells us the winner, so if the winner is found the game should be terminated
-// This seems like a good idea
 
 const cells = document.getElementsByClassName('cell');
 const winningMessage = document.getElementById('winningMessage');
