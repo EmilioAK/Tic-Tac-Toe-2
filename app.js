@@ -45,7 +45,9 @@ const ticTacToe = (function() {
     }
   };
   const place = (index) => {
-    board[index] = metadata.whosTurn;
+    if (board[index] === null) {
+      board[index] = metadata.whosTurn;
+    }
     gameOver();
   }
 
