@@ -57,36 +57,30 @@ const ticTacToe = (function() {
 const cells = document.getElementsByClassName('cell');
 const winningMessage = document.getElementById('winningMessage');
 
-for (let index = 0; index < cells.length; index++) {
-  const cell = cells[index];
-  cell.addEventListener('click', () => {
-    ticTacToe.place(index);
-    drawBoard();
-  });
-}
-
-function drawBoard() {
+function render() {
   const players = {
     0: 'Circle',
     1: 'Cross',
     'Tie': 'Tie'
   };
 
-  for (let index = 0; index < ticTacToe.getBoard().length; index++) {
-    const gameCell = ticTacToe.getBoard()[index];
-    domCell = cells[index]
-
-    domCell.innerHTML = '';
-    if (gameCell === 0) {
-      const circleDiv = document.createElement('div');
-      circleDiv.className = 'circle';
-      domCell.appendChild(circleDiv);
-    } else if (gameCell === 1) {
-      const crossDiv = document.createElement('div');
-      crossDiv.className = 'cross';
-      domCell.appendChild(crossDiv);
+  const drawBoard = (() => {
+    for (let index = 0; index < ticTacToe.getBoard().length; index++) {
+      const gameCell = ticTacToe.getBoard()[index];
+      domCell = cells[index]
+  
+      domCell.innerHTML = '';
+      if (gameCell === 0) {
+        const circleDiv = document.createElement('div');
+        circleDiv.className = 'circle';
+        domCell.appendChild(circleDiv);
+      } else if (gameCell === 1) {
+        const crossDiv = document.createElement('div');
+        crossDiv.className = 'cross';
+        domCell.appendChild(crossDiv);
+      }
     }
-  }
+  })();
 
   const winnerDeclared = (() => {
     const winningPlayer = ticTacToe.getMetadata().winner;
@@ -99,8 +93,16 @@ function drawBoard() {
   })();
 }
 
+for (let index = 0; index < cells.length; index++) {
+  const cell = cells[index];
+  cell.addEventListener('click', () => {
+    ticTacToe.place(index);
+    render();
+  });
+}
+
 document.getElementById('restartButton').addEventListener('click', () => {
   ticTacToe.reset();
   winningMessage.style.display = 'none';
-  drawBoard();
+  render();
 });
