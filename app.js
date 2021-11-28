@@ -87,9 +87,7 @@ function render() {
     if (winningPlayer != null) {
       document.getElementById('winner').textContent = winningPlayer === 'Tie' ? 'Tie!' : `${players[winningPlayer]} won the game!`;
       winningMessage.style.display = 'flex';
-      return true
     }
-    return false
   })();
 }
 
