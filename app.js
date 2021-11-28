@@ -62,17 +62,22 @@ for (let index = 0; index < cells.length; index++) {
   cell.addEventListener('click', () => {
     ticTacToe.place(index);
     drawBoard();
-    winner();
   });
 }
 
 function drawBoard() {
+  const players = {
+    0: 'Circle',
+    1: 'Cross',
+    'Tie': 'Tie'
+  };
+
   for (let index = 0; index < ticTacToe.getBoard().length; index++) {
     const gameCell = ticTacToe.getBoard()[index];
     domCell = cells[index]
 
     domCell.innerHTML = '';
-    if (gameCell === 0) { // Fix so that 0 and 1 have clearer meaning
+    if (gameCell === 0) {
       const circleDiv = document.createElement('div');
       circleDiv.className = 'circle';
       domCell.appendChild(circleDiv);
@@ -82,19 +87,16 @@ function drawBoard() {
       domCell.appendChild(crossDiv);
     }
   }
-}
 
-function winner() {
-  const players = {
-    0: 'Circle',
-    1: 'Cross',
-    'Tie': 'Tie'
-  };
-  winningPlayer = ticTacToe.getMetadata().winner;
-  if (winningPlayer != null) {
-    document.getElementById('winner').textContent = winningPlayer === 'Tie' ? 'Tie!' : `${players[winningPlayer]} won the game!`;
-    winningMessage.style.display = 'flex';
-  }
+  const winnerDeclared = (() => {
+    const winningPlayer = ticTacToe.getMetadata().winner;
+    if (winningPlayer != null) {
+      document.getElementById('winner').textContent = winningPlayer === 'Tie' ? 'Tie!' : `${players[winningPlayer]} won the game!`;
+      winningMessage.style.display = 'flex';
+      return true
+    }
+    return false
+  })();
 }
 
 document.getElementById('restartButton').addEventListener('click', () => {
