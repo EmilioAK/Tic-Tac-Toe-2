@@ -81,7 +81,7 @@ function render() {
   const winnerDeclared = (() => {
     const winningPlayer = ticTacToe.getMetadata().winner;
     if (winningPlayer != null) {
-      document.getElementById('winner').textContent = winningPlayer === 'Tie' ? 'Tie!' : `${winningPlayer} won the game!`;
+      document.getElementById('winner').textContent = `${winningPlayer}${winningPlayer != 'Tie' ? ' won the game' : ''}`;
       winningMessage.style.display = 'flex';
     }
   })();
