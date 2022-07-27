@@ -7,7 +7,7 @@ const ticTacToe = (function() {
     const emptyBoard = _.range(9).fill(null);
     emptyBoard.forEach(e => {board.push(e)});
 
-    metadata.whosTurn = 'Circle';
+    metadata.whosTurn = 'Cross';
     metadata.winner = null;
   };reset();
 
